@@ -1,23 +1,23 @@
-import{i as p,S as a}from"./assets/vendor-5b791d57.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const l of t.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&i(l)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const n={form:document.querySelector(".form"),input:document.querySelector("#user-input"),button:document.querySelector(".search-button"),gallery:document.querySelector(".gallery")};function m(o){const s="https://pixabay.com/api/?key="+"42305784-5d55228baaa9a6392a5b2668b"+"&q="+o+"&image_type=photo&orientation=horizontal&safesearch=true";return n.gallery.classList.add("loader"),fetch(s).then(i=>i.json())}function d(o){const r=o.hits;r.length===0?p.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"}):y(r)}function y(o){let r=new a(".gallery a");r.refresh();const s=o.map(({webformatURL:i,largeImageURL:e,tags:t,likes:l,views:c,comments:u,downloads:f})=>`<li class="gallery-item">
+import{a as l,i as c,S as u}from"./assets/vendor-527658dd.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function a(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=a(e);fetch(e.href,t)}})();const s={form:document.querySelector(".form"),input:document.querySelector("#user-input"),button:document.querySelector(".search-button"),gallery:document.querySelector(".gallery")};async function d(o,r){s.gallery.classList.add("loader"),l.defaults.baseURL="https://pixabay.com/api/";const a="42305784-5d55228baaa9a6392a5b2668b";l.defaults.params={key:a,q:o,image_type:"photo",orientation:"horizontal",safesearch:!0,per_page:15,page:r};const{data:i}=await l.get();return i}function y(o){s.gallery.classList.remove("loader"),o.hits.length===0?c.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topLeft"}):(c.success({message:`A total of ${o.totalHits} images were successfully found`,position:"topLeft"}),h(o))}function h(o){let r=new u(".gallery a");r.refresh();const a=o.hits.map(({webformatURL:i,largeImageURL:e,tags:t,likes:n,views:f,comments:p,downloads:m})=>`<li class="gallery-item">
         <a href="${e}">
           <img src="${i}" alt="${t}" title="${t}"/>
           <ul>
             <li>
               <h3>Likes</h3>
-              <p>${l}</p>
+              <p>${n}</p>
             </li>
             <li>
               <h3>Vievs</h3>
-              <p>${c}</p>
+              <p>${f}</p>
             </li>
             <li>
               <h3>Comments</h3>
-              <p>${u}</p>
+              <p>${p}</p>
             </li>
             <li>
               <h3>Downloads</h3>
-              <p>${f}</p>
+              <p>${m}</p>
             </li>
           </ul>
-        </a></li>`).join("");n.gallery.innerHTML=s,r=new a(".gallery a",{captions:!1})}function h(o){o.preventDefault(),n.gallery.innerHTML="";const r=n.input.value.trim();r!==""&&m(r).then(d).catch().finally(()=>n.gallery.classList.remove("loader"))}n.form.addEventListener("submit",h);
+        </a></li>`).join("");s.gallery.insertAdjacentHTML("beforeend",a),r=new u(".gallery a",{captions:!1})}function g(o){o.preventDefault(),s.gallery.innerHTML="";const r=s.input.value.trim();r!==""?d(r,1).then(y):c.error({message:"Sorry, the search bar is empty. Please try again!",position:"topLeft"})}s.form.addEventListener("submit",g);
 //# sourceMappingURL=commonHelpers.js.map
