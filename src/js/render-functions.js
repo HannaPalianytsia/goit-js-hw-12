@@ -6,21 +6,25 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 export function checkFunction(userData) {
-    const userArray = userData.hits;
-    if (userArray.length === 0) {
+    refs.gallery.classList.remove("loader");
+    if (userData.hits.length === 0) {
         iziToast.error({
             message: "Sorry, there are no images matching your search query. Please try again!",
-            position: "topRight",
+            position: "topLeft",
         });
     } else {
-        renderFunction(userArray);
+        iziToast.success({
+            message: `A total of ${userData.totalHits} images were successfully found`,
+            position: "topLeft",
+        });
+        renderFunction(userData);
     }
 };
 
-function renderFunction(userArray) {
+function renderFunction(userData) {
   let gallery = new SimpleLightbox(".gallery a");
   gallery.refresh();
-    const markup = userArray.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
+    const markup = userData.hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
         return `<li class="gallery-item">
         <a href="${largeImageURL}">
           <img src="${webformatURL}" alt="${tags}" title="${tags}"/>
@@ -44,7 +48,7 @@ function renderFunction(userArray) {
           </ul>
         </a></li>`
     }).join("");
-  refs.gallery.innerHTML = markup;
+  refs.gallery.insertAdjacentHTML("beforeend", markup);
 
   gallery = new SimpleLightbox(".gallery a",{captions: false,});
 };
