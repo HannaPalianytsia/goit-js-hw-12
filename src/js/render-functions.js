@@ -50,5 +50,7 @@ function renderFunction(userData) {
     }).join("");
   refs.gallery.insertAdjacentHTML("beforeend", markup);
 
-  gallery = new SimpleLightbox(".gallery a",{captions: false,});
+  gallery = new SimpleLightbox(".gallery a", { captions: false, });
+  
+  if (userData.totalHits > 15) refs.loadMore.classList.remove("is-hidden");
 };

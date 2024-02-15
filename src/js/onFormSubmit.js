@@ -7,6 +7,7 @@ import "izitoast/dist/css/iziToast.min.css";
 
 export function onFormSubmit(event) {
     event.preventDefault();
+    refs.loadMore.classList.add("is-hidden");
     refs.gallery.innerHTML = "";
     const userText = refs.input.value.trim();
     if (userText !== "") {
