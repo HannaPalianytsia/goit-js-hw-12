@@ -141,3 +141,6 @@
 .is-hidden {
   display: none;
 }
+#loader {
+  margin-top: 24px;
+}
